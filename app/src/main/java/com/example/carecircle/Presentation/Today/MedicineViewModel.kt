@@ -1,13 +1,13 @@
 package com.example.carecircle.Presentation.Today
 
-import android.util.Log
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import com.example.carecircle.data.Medication
-import com.example.carecircle.data.TodayUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MedicineViewModel : ViewModel() {
     private val _meds = MutableStateFlow<List<Medication>>(getFakeMedicines())
@@ -23,8 +23,9 @@ class MedicineViewModel : ViewModel() {
             Medication(name = "Metformin", dosage = "850mg", time = "7:00 AM",taken = false)
         )
     }
-    fun addmedications(med: Medication)
+    fun addMedication(name:String , dosage : String , time :String)
     {
+        val med = Medication(name = name , dosage = dosage , time = time , taken = false)
         _meds.update { currentList ->
             currentList+med
         }
@@ -32,11 +33,14 @@ class MedicineViewModel : ViewModel() {
 
 
     fun markAsTaken(med: Medication) {
+        val formatter = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        val currentTime = formatter.format(Date())
         _meds.update { state ->
             state.map {
-                if (it.id == med.id) it.copy(taken = true) else it
+                if (it.id == med.id) it.copy(taken = true , takenAt = currentTime) else it
             }
         }
+        //Log.d("MedicineViewModel", "Marked medicine as taken: $med")
     }
     fun removeMed(med: Medication)
     {

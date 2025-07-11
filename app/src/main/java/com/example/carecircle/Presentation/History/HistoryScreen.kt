@@ -15,7 +15,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.carecircle.Presentation.Today.MedicineCard
 import com.example.carecircle.Presentation.Today.MedicineViewModel
 import com.example.carecircle.data.Medication
 
@@ -46,7 +45,7 @@ fun HistoryCard(medicine: Medication) {
         Column(Modifier.padding(12.dp)) {
             Text("💊 ${medicine.name}", fontWeight = FontWeight.Bold)
             Text("Dosage: ${medicine.dosage}")
-            Text("Time Taken: ${medicine.time}")
+            Text("Time Taken: ${medicine.takenAt}")
         }
     }
 }

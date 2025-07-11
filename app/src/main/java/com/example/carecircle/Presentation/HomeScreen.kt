@@ -27,6 +27,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.carecircle.Presentation.History.HistoryScreen
+import com.example.carecircle.Presentation.Pills.AddPillScreen
 import com.example.carecircle.Presentation.Pills.PillsScreen
 import com.example.carecircle.Presentation.Today.MedicineViewModel
 import com.example.carecircle.Presentation.Today.TodayScreen
@@ -96,7 +97,8 @@ fun HomeScreen(navController: NavHostController = rememberNavController()) {
         ) {
             composable(BottomNavItem.Home.route) { TodayScreen( medicineViewModel= medViewModel) }
             composable(BottomNavItem.History.route) { HistoryScreen(medicineViewModel = medViewModel) }
-            composable(BottomNavItem.Pills.route) { PillsScreen(medicineViewModel = medViewModel) }
+            composable(BottomNavItem.Pills.route) { PillsScreen(medicineViewModel = medViewModel,navController) }
+            composable("addpill") { AddPillScreen(medViewModel,navController) }
         }
     }
 }
