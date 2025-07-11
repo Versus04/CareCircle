@@ -9,20 +9,26 @@ import androidx.compose.material.icons.filled.WatchLater
 import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.LocalPharmacy
 import androidx.compose.material.icons.outlined.WatchLater
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.carecircle.Presentation.History.HistoryScreen
+import com.example.carecircle.Presentation.Pills.PillsScreen
+import com.example.carecircle.Presentation.Today.MedicineViewModel
 import com.example.carecircle.Presentation.Today.TodayScreen
 
 sealed class BottomNavItem(
@@ -35,6 +41,7 @@ sealed class BottomNavItem(
     object History : BottomNavItem("history", "History", Icons.Outlined.WatchLater, Icons.Filled.WatchLater)
     object Pills : BottomNavItem("pills", "Pills", Icons.Outlined.LocalPharmacy, Icons.Filled.LocalPharmacy)
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(navController: NavHostController = rememberNavController()) {
@@ -43,6 +50,8 @@ fun HomeScreen(navController: NavHostController = rememberNavController()) {
         BottomNavItem.History,
         BottomNavItem.Pills
     )
+    val medViewModel = viewModel<MedicineViewModel>()
+
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -74,6 +83,10 @@ fun HomeScreen(navController: NavHostController = rememberNavController()) {
                     )
                 }
             }
+        } , topBar = {
+            TopAppBar(
+                title = { Text("My App") }
+            )
         }
     ) {
         NavHost(
@@ -81,9 +94,9 @@ fun HomeScreen(navController: NavHostController = rememberNavController()) {
             startDestination = BottomNavItem.Home.route,
             modifier = Modifier.padding(it)
         ) {
-            composable(BottomNavItem.Home.route) { TodayScreen() }
-            composable(BottomNavItem.History.route) { Text("History screen") }
-            composable(BottomNavItem.Pills.route) { Text("Pills screen") }
+            composable(BottomNavItem.Home.route) { TodayScreen( medicineViewModel= medViewModel) }
+            composable(BottomNavItem.History.route) { HistoryScreen(medicineViewModel = medViewModel) }
+            composable(BottomNavItem.Pills.route) { PillsScreen(medicineViewModel = medViewModel) }
         }
     }
 }

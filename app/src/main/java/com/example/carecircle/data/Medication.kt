@@ -1,3 +1,10 @@
 package com.example.carecircle.data
 
-data class Medication( val name : String , val dosage : String ,val time : String)
+import java.util.UUID
+
+data class Medication(
+    val id: String = UUID.randomUUID().toString(),
+    val name : String,
+    val dosage : String,
+    val time : String,
+    var taken : Boolean)

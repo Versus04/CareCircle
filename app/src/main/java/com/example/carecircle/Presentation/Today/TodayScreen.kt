@@ -1,7 +1,6 @@
 package com.example.carecircle.Presentation.Today
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,20 +25,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.carecircle.data.Medication
 import com.example.carecircle.R
+import com.example.carecircle.data.Medication
+
 @Composable
-fun TodayScreen( todayViewModel: TodayViewModel = viewModel())
+fun TodayScreen(medicineViewModel: MedicineViewModel )
 {
-    val curr by todayViewModel.uiState.collectAsState()
+    val curr by medicineViewModel.medications.collectAsState()
     Column(Modifier.fillMaxSize() , verticalArrangement = Arrangement.Center ,
         horizontalAlignment = Alignment.CenterHorizontally){
         LazyColumn {
-            items(curr.medications){ it ->
-                MedicineCard(it)
+            items(curr){ it ->
+                MedicineCard(it , { medicineViewModel.markAsTaken(med = it) },"Mark As Taken")
             }
 
         }
@@ -47,7 +45,7 @@ fun TodayScreen( todayViewModel: TodayViewModel = viewModel())
     }
 }
 @Composable
-fun MedicineCard(medicine: Medication) {
+fun MedicineCard(medicine: Medication , onclick: () -> Unit , toshow: String) {
     Card(
         modifier = Modifier
             .padding(8.dp)
@@ -91,20 +89,28 @@ fun MedicineCard(medicine: Medication) {
                 }
             }
 
-            Button(
-                onClick = { /* Handle action */ },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(32.dp)
-            ) {
-                Text("Mark As Taken")
-            }
+
+                if (!medicine.taken)Button(
+                    onClick = {
+                        onclick()
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(32.dp)
+                ) {
+                    Text(toshow)
+                }
+            else{
+                    Text(
+                        text = "✅ Medicine already taken",
+                        color = Color.Green,
+                        fontWeight = FontWeight.SemiBold
+                    )
+
+                }
+
+
+                }
+
         }
     }
-}
 
-@Preview
-@Composable
-fun prev()
-{
-    MedicineCard(Medication(name = "Paracetamol", dosage = "500mg", time = "8:00 AM"))
-}
