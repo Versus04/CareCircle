@@ -1,4 +1,4 @@
-package com.example.carecircle.Presentation.History
+package com.example.carecircle.presentation.history
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,7 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.carecircle.Presentation.Today.MedicineViewModel
+import com.example.carecircle.presentation.today.MedicineViewModel
 import com.example.carecircle.data.Medication
 
 @Composable

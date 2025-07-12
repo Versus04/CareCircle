@@ -1,4 +1,4 @@
-package com.example.carecircle.Presentation.Pills
+package com.example.carecircle.presentation.pills
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,8 +14,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.carecircle.Presentation.Today.MedicineCard
-import com.example.carecircle.Presentation.Today.MedicineViewModel
+import com.example.carecircle.presentation.today.MedicineCard
+import com.example.carecircle.presentation.today.MedicineViewModel
 
 @Composable
 fun PillsScreen(medicineViewModel: MedicineViewModel , navController: NavController)

@@ -1,4 +1,4 @@
-package com.example.carecircle.Presentation.Pills
+package com.example.carecircle.presentation.pills
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,10 +19,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.carecircle.Presentation.Today.MedicineViewModel
-import com.example.carecircle.Services.DialWithDialogExample
+import com.example.carecircle.presentation.today.MedicineViewModel
+import com.example.carecircle.services.DialWithDialogExample
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,9 +31,10 @@ fun AddPillScreen(
     viewModel: MedicineViewModel,
     navController: NavController
 ) {
+    val context = LocalContext.current
     var name by remember { mutableStateOf("") }
     var dosage by remember { mutableStateOf("") }
-    var time by remember { mutableStateOf("08:00") } // default value
+    var time by remember { mutableStateOf("08:00") }
     var showTimeDialog by remember { mutableStateOf(false) }
 
     Column(
@@ -68,13 +70,12 @@ fun AddPillScreen(
                 onValueChange = {},
                 readOnly = true,
                 label = { Text("Dosage Time") },
-                enabled = false, // optional: makes it look more like a display field
+                enabled = false,
                 modifier = Modifier.fillMaxWidth()
             )
         }
 
 
-        // 👇 Show your custom dialog here
         if (showTimeDialog) {
             DialWithDialogExample(
                 onConfirm = { timeState ->
@@ -93,6 +94,7 @@ fun AddPillScreen(
             onClick = {
                 if (name.isNotBlank() && dosage.isNotBlank() && time.isNotBlank()) {
                     viewModel.addMedication(name, dosage, time)
+                    //schedulerImpl.schedule(viewModel.getFakeMedicines().last())
                     navController.popBackStack()
                 }
             },

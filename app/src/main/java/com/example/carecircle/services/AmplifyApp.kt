@@ -1,4 +1,4 @@
-package com.example.carecircle.Services
+package com.example.carecircle.services
 
 import android.app.Application
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin

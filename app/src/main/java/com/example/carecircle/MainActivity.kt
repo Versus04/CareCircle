@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.carecircle.Services.Navi
+import com.example.carecircle.services.Navi
 import com.example.carecircle.ui.theme.CareCircleTheme
 
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.example.carecircle.Presentation
+package com.example.carecircle.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

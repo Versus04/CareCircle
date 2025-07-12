@@ -1,4 +1,4 @@
-package com.example.carecircle.Presentation
+package com.example.carecircle.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.padding
@@ -26,11 +26,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.carecircle.Presentation.History.HistoryScreen
-import com.example.carecircle.Presentation.Pills.AddPillScreen
-import com.example.carecircle.Presentation.Pills.PillsScreen
-import com.example.carecircle.Presentation.Today.MedicineViewModel
-import com.example.carecircle.Presentation.Today.TodayScreen
+import com.example.carecircle.presentation.history.HistoryScreen
+import com.example.carecircle.presentation.pills.AddPillScreen
+import com.example.carecircle.presentation.pills.PillsScreen
+import com.example.carecircle.presentation.today.MedicineViewModel
+import com.example.carecircle.presentation.today.TodayScreen
 
 sealed class BottomNavItem(
     val route: String,

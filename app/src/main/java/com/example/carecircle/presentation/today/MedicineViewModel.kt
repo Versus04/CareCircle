@@ -1,4 +1,4 @@
-package com.example.carecircle.Presentation.Today
+package com.example.carecircle.presentation.today
 
 import androidx.lifecycle.ViewModel
 import com.example.carecircle.data.Medication
@@ -16,11 +16,11 @@ class MedicineViewModel : ViewModel() {
     fun getFakeMedicines() : List<Medication>
     {
         return listOf(
-            Medication(name = "Paracetamol", dosage = "500mg", time = "8:00 AM", taken = false),
-            Medication(name = "Amoxicillin", dosage = "250mg", time = "12:00 PM",taken = false),
-            Medication(name = "Vitamin D3", dosage = "1000 IU", time = "6:00 PM",taken = false),
-            Medication(name = "Ibuprofen", dosage = "400mg", time = "9:00 PM",taken = false),
-            Medication(name = "Metformin", dosage = "850mg", time = "7:00 AM",taken = false)
+            Medication(name = "Paracetamol", dosage = "500mg", time = "08:00", taken = false),
+            Medication(name = "Amoxicillin", dosage = "250mg", time = "12:00", taken = false),
+            Medication(name = "Vitamin D3", dosage = "1000 IU", time = "18:00", taken = false),
+            Medication(name = "Ibuprofen", dosage = "400mg", time = "21:00", taken = false),
+            Medication(name = "Metformin", dosage = "850mg", time = "07:00", taken = false)
         )
     }
     fun addMedication(name:String , dosage : String , time :String)
@@ -33,7 +33,7 @@ class MedicineViewModel : ViewModel() {
 
 
     fun markAsTaken(med: Medication) {
-        val formatter = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
         val currentTime = formatter.format(Date())
         _meds.update { state ->
             state.map {

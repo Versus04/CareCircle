@@ -1,4 +1,4 @@
-package com.example.carecircle.Presentation.Today
+package com.example.carecircle.presentation.today
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
