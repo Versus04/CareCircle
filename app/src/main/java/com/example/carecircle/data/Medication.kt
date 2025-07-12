@@ -7,7 +7,7 @@ data class Medication(
     val name : String,
     val dosage : String,
     val time : String ="",
-    var taken : Boolean,
+    var taken : Boolean= false,
     val takenAt: String? = null
 
 )

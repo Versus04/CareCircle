@@ -25,7 +25,7 @@ class MedicineViewModel : ViewModel() {
     }
     fun addMedication(name:String , dosage : String , time :String)
     {
-        val med = Medication(name = name , dosage = dosage , time = time , taken = false)
+        val med = Medication(name = name , dosage = dosage , time = time )
         _meds.update { currentList ->
             currentList+med
         }
@@ -40,7 +40,6 @@ class MedicineViewModel : ViewModel() {
                 if (it.id == med.id) it.copy(taken = true , takenAt = currentTime) else it
             }
         }
-        //Log.d("MedicineViewModel", "Marked medicine as taken: $med")
     }
     fun removeMed(med: Medication)
     {

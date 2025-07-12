@@ -22,8 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.carecircle.data.Medication
 import com.example.carecircle.presentation.today.MedicineViewModel
+import com.example.carecircle.services.AlarmScheduleImpl
 import com.example.carecircle.services.DialWithDialogExample
+import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +39,7 @@ fun AddPillScreen(
     var dosage by remember { mutableStateOf("") }
     var time by remember { mutableStateOf("08:00") }
     var showTimeDialog by remember { mutableStateOf(false) }
-
+    val sch = remember { AlarmScheduleImpl(context) }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -93,8 +96,16 @@ fun AddPillScreen(
         Button(
             onClick = {
                 if (name.isNotBlank() && dosage.isNotBlank() && time.isNotBlank()) {
-                    viewModel.addMedication(name, dosage, time)
-                    //schedulerImpl.schedule(viewModel.getFakeMedicines().last())
+                    val medication = Medication(
+                        id = UUID.randomUUID().toString(),
+                        name = name,
+                        dosage = dosage,
+                        time = time,
+                        taken = false,
+                        takenAt = null
+                    )
+                    viewModel.addMedication(dosage,name,time)
+                    sch.schedule(medication)
                     navController.popBackStack()
                 }
             },

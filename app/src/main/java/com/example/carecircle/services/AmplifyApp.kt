@@ -10,4 +10,6 @@ class AmplifyApp : Application(){
         Amplify.addPlugin(AWSCognitoAuthPlugin())
         Amplify.configure(applicationContext)
     }
+
+
 }
